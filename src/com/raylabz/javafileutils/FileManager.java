@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 public class FileManager {
 
     /**
-     * Writes the given content to a file.
+     * Writes text data to a file.
      * @param path The path of the file to write the content to.
      * @param content The content to write to the file.
      * @throws IOException Throws IOException when the file cannot be opened for a write.
@@ -22,15 +22,36 @@ public class FileManager {
     }
 
     /**
-     * Reads data from a file.
+     * Writes binary data to a file.
+     * @param path The path of the file to write the content to.
+     * @param content The content to write to the file.
+     * @throws IOException Throws IOException when the file cannot be opened for a write.
+     */
+    public static void writeFile(String path, byte[] content) throws IOException {
+        FileOutputStream writer = new FileOutputStream(path);
+        writer.write(content);
+    }
+
+    /**
+     * Reads text data from a file.
      * @param path The path of the file to read.
      * @return Returns a String.
      * @throws IOException Throws IOException when the file cannot be opened for a read.
      */
-    public static String readFile(String path) throws IOException {
+    public static String readTextFile(String path) throws IOException {
         String data = "";
         data = new String(Files.readAllBytes(Paths.get(path)));
         return data;
+    }
+
+    /**
+     * Reads binary data from a file.
+     * @param path The path of the file to read.
+     * @return Returns a byte array.
+     * @throws IOException Throws IOException when the file cannot be opened for a read.
+     */
+    public static byte[] readBinaryFile(String path) throws IOException {
+        return Files.readAllBytes(Paths.get(path));
     }
 
     /**
